@@ -12,7 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show System Imformation
-        run: uname -a
+        run: |
+          echo "Run multiple lines of code ${uname -a} ${uname -r}"
+          echo "Current user is $(whoami)"
+          echo "OS: $RUNNER_OS"
+          echo "Kernel: $RUNNER_KERNEL"
+          echo "Arch: $RUNNER_ARCH"
 
       - name: Run a one-line script
         run: echo "Hello world"
