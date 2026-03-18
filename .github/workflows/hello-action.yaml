@@ -11,12 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Show System Imformation
+      - name: Show System Information
         run: |
-          echo "Run multiple lines of code ${uname -a} ${uname -r}"
+          echo "Run multiple lines of code $(uname -a)"
+          echo "Kernel version $(uname -r)"
           echo "Current user is $(whoami)"
           echo "OS: $RUNNER_OS"
-          echo "Kernel: $RUNNER_KERNEL"
           echo "Arch: $RUNNER_ARCH"
 
       - name: Run a one-line script
