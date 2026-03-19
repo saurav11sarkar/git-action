@@ -32,8 +32,7 @@ jobs:
         run: date
 
       - name: Print the input name to STDOUT
-        run: echo The username is ${{ inputs.username }}
-
+        run: echo "The username is ${{ inputs.username }}"
   checkout-example:
     runs-on: ubuntu-latest
     steps:
