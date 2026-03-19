@@ -54,5 +54,11 @@ jobs:
       - name: Show last commit message
         run: echo "Last commit message:$(git log -1 --pretty=%B)"
 
+      - name: Show full diff between last 2 commits
+        run: |
+          echo "========== LAST 2 COMMITS DIFF =========="
+          git diff --name-status HEAD~1 HEAD
+          echo "========================================="
+
       - name: Display files in the repository
         run: ls -la
