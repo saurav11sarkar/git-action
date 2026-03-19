@@ -1,5 +1,8 @@
 name: hello world
 
+env:
+  USERNAME: "sauravsarkar"
+
 on:
   workflow_dispatch:
     inputs:
@@ -33,6 +36,10 @@ jobs:
 
       - name: Print the input name to STDOUT
         run: echo "The username is ${{ inputs.username }}"
+
+      - name: Print the username to STDOUT
+        run: echo "The username is ${{ env.USERNAME }}"
+
   checkout-example:
     runs-on: ubuntu-latest
     steps:
