@@ -2,6 +2,12 @@ name: hello world
 
 on:
   workflow_dispatch:
+    inputs:
+      username:
+        description: "A username passed from the caller workflow"
+        default: "john-doe"
+        required: false
+        type: string
 
   push:
     branches:
@@ -24,6 +30,9 @@ jobs:
 
       - name: Show current date
         run: date
+
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.username }}
 
   checkout-example:
     runs-on: ubuntu-latest
