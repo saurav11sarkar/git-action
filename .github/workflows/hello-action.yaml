@@ -24,3 +24,12 @@ jobs:
 
       - name: Show current date
         run: date
+
+  checkout-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Display files in the repository
+        run: ls -la
