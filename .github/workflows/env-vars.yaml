@@ -55,16 +55,14 @@ jobs:
           git log -1
 
       - name: Show last commit message
-        run: echo "Last commit message: $(git log -1 --pretty=%B)"
+        run: echo "Last commit message:$(git log -1 --pretty=%B)"
 
       - name: Show full diff between last 2 commits (safe)
         run: |
-          echo "========== LAST 2 COMMITS DIFF =========="
+          echo "========== LAST 2 COMMITS DIFF ==========="
 
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             git diff --name-status HEAD~1 HEAD
           else
             echo "No previous commit found (only 1 commit exists)"
           fi
-
-          echo "========================================="
