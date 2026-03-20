@@ -29,15 +29,14 @@ jobs:
           echo "JOB_VAR: $JOB_VAR"
           echo "LOCAL_VAR: $LOCAL_VAR"
           echo "REPO_VAR: $REPO_VAR"
-          echo "USERNAME: $USERNAME"
-
+          echo "USERNAME: ${{ github.event.inputs.username }}"
         env:
           LOCAL_VAR: "local variable"
 
       - name: Access GitHub secret & variable
         run: |
-          echo "GITHUB_REPO:{}" ${{var.REPO_VAR}}
-          echo "GITHUB_SECRET:{}" ${{secrets.REPO_SECRET}}
+          echo "GITHUB_REPO: ${{ vars.REPO_VAR }}"
+          echo "GITHUB_SECRET: ${{ secrets.REPO_SECRET }}"
 
       - name: Show current date
         run: date
@@ -56,7 +55,7 @@ jobs:
           git log -1
 
       - name: Show last commit message
-        run: echo "Last commit message:$(git log -1 --pretty=%B)"
+        run: echo "Last commit message: $(git log -1 --pretty=%B)"
 
       - name: Show full diff between last 2 commits (safe)
         run: |
