@@ -1,0 +1,71 @@
+name: hello world
+
+env:
+  GLOBAL_VAR: "workflow level variable"
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: "A username passed from the caller workflow"
+        default: "john-doe"
+        required: false
+        type: string
+
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    env:
+      JOB_VAR: "job level variable"
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show environment variables
+        run: |
+          echo "GLOBAL_VAR: $GLOBAL_VAR"
+          echo "JOB_VAR: $JOB_VAR"
+          echo "LOCAL_VAR: $LOCAL_VAR"
+          echo "REPO_VAR: $REPO_VAR"
+          echo "USERNAME: $USERNAME"
+
+        env:
+          LOCAL_VAR: "local variable"
+
+      - name: Access GitHub secret & variable
+        run: |
+          echo "GITHUB_REPO:{}" ${{var.REPO_VAR}}
+          echo "GITHUB_SECRET:{}" ${{secrets.REPO_SECRET}}
+
+      - name: Show current date
+        run: date
+
+  checkout-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Show last commit details
+        run: |
+          echo "Last commit:"
+          git log -1
+
+      - name: Show last commit message
+        run: echo "Last commit message:$(git log -1 --pretty=%B)"
+
+      - name: Show full diff between last 2 commits (safe)
+        run: |
+          echo "========== LAST 2 COMMITS DIFF =========="
+
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            git diff --name-status HEAD~1 HEAD
+          else
+            echo "No previous commit found (only 1 commit exists)"
+          fi
+
+          echo "========================================="
