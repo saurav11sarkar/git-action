@@ -2,7 +2,8 @@ name: hello world
 
 env:
   GLOBAL_VAR: "workflow level variable"
-  REPO_VAR: ${{ vars.REPO_VAR }}:"repo level variable"
+  REPO_VAR: ${{ vars.REPO_VAR }}
+
 on:
   workflow_dispatch:
     inputs:
@@ -57,7 +58,7 @@ jobs:
 
       - name: Show full diff between last 2 commits (safe)
         run: |
-          echo "========== LAST 2 COMMITS DIFF ==========="
+          echo "========== LAST 2 COMMITS DIFF =========="
 
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             git diff --name-status HEAD~1 HEAD
